@@ -1,11 +1,3 @@
-import Dep.android_junit_lib
-import Dep.appcompat_lib
-import Dep.constraint_layout_lib
-import Dep.core_ktx_lib
-import Dep.espresso_lib
-import Dep.junit_lib
-import Dep.material_lib
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -43,12 +35,21 @@ android {
 }
 
 dependencies {
+    implementation(
+        fileTree(
+            mapOf(
+                "dir" to "libs",
+                "include" to listOf("*.jar")
+            )
+        )
+    )
 
-    implementation(core_ktx_lib)
-    implementation(appcompat_lib)
-    implementation(material_lib)
-    implementation(constraint_layout_lib)
-    testImplementation(junit_lib)
-    androidTestImplementation(android_junit_lib)
-    androidTestImplementation(espresso_lib)
+    implementation(deps.androidx.coreKtx)
+    implementation(deps.androidx.appCompat)
+    implementation(deps.androidx.material)
+    implementation(deps.androidx.constraintLayout)
+
+    addUnitTest()
+    testImplementation(deps.koin.testJunit4)
+    testImplementation(deps.koin.test)
 }
