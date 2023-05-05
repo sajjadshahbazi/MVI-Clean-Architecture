@@ -1,4 +1,5 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
@@ -8,11 +9,11 @@ const val kotlinVersion = "1.7.20"
 object appConfig {
     const val applicationId = "com.hoc.flowmvi"
 
-    const val compileSdkVersion = 32
+    const val compileSdkVersion = 33
     const val buildToolsVersion = "32.0.0"
 
     const val minSdkVersion = 21
-    const val targetSdkVersion = 32
+    const val targetSdkVersion = 33
 
     private const val MAJOR = 2
     private const val MINOR = 1
@@ -103,16 +104,16 @@ inline val PDsS.kotlinKapt: PDS get() = id("kotlin-kapt")
 inline val PDsS.kotlinParcelize: PDS get() = id("kotlin-parcelize")
 inline val PDsS.nocopyPlugin: PDS get() = id("dev.ahmedmourad.nocopy.nocopy-gradle-plugin")
 
-//inline val DependencyHandler.domain get() = project(":domain")
+inline val DependencyHandler.domain get() = project(":domain")
 //inline val DependencyHandler.core get() = project(":core")
-//inline val DependencyHandler.coreUi get() = project(":core-ui")
-//inline val DependencyHandler.data get() = project(":data")
+inline val DependencyHandler.common get() = project(":common")
+inline val DependencyHandler.data get() = project(":data")
 //inline val DependencyHandler.featureMain get() = project(":feature-main")
 //inline val DependencyHandler.featureAdd get() = project(":feature-add")
 //inline val DependencyHandler.featureSearch get() = project(":feature-search")
 //inline val DependencyHandler.mviBase get() = project(":mvi-base")
-//inline val DependencyHandler.mviTesting get() = project(":mvi-testing")
-//inline val DependencyHandler.testUtils get() = project(":test-utils")
+inline val DependencyHandler.mviTesting get() = project(":mvi-testing")
+inline val DependencyHandler.testUtils get() = project(":test-utils")
 
 fun DependencyHandler.addUnitTest(testImplementation: Boolean = true) {
     val configName = if (testImplementation) "testImplementation" else "implementation"

@@ -1,24 +1,23 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
+    namespace = "sajjad.shahbazi.common"
     compileSdk = appConfig.compileSdkVersion
 
     defaultConfig {
-        applicationId = "sajjad.shahbazi.cleanachitecture"
         minSdk = appConfig.minSdkVersion
         targetSdk = appConfig.targetSdkVersion
-        versionCode = projectVersionCode
-        versionName = projectVersionName
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = isReleaseMinify
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -26,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -44,17 +43,5 @@ dependencies {
         )
     )
 
-    implementation(domain)
-    implementation(common)
-    implementation(data)
-
     implementation(deps.androidx.coreKtx)
-    implementation(deps.androidx.appCompat)
-    implementation(deps.androidx.material)
-    implementation(deps.androidx.constraintLayout)
-
-    addUnitTest()
-    testImplementation(deps.koin.testJunit4)
-    testImplementation(deps.koin.test)
-    testImplementation(deps.test.junit)
 }
