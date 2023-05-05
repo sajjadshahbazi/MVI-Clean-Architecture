@@ -1,7 +1,3 @@
-const val androidCompileSdkVersion = 32
-const val androidTargetSdkVersion = 32
-const val androidMinSdkVersion = 21
-
 const val isReleaseDebuggable = false
 const val isDebugDebuggable = true
 const val isDebugMinify = false
