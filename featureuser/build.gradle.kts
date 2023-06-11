@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "sajjad.shahbazi.common"
+    namespace = "sajjad.shahbazi.featureuser"
     compileSdk = appConfig.compileSdkVersion
 
     defaultConfig {
@@ -34,18 +34,18 @@ android {
 }
 
 dependencies {
-    implementation(
-        fileTree(
-            mapOf(
-                "dir" to "libs",
-                "include" to listOf("*.jar")
-            )
-        )
-    )
+
+    implementation(domain)
+    implementation(common)
+    implementation(data)
 
     implementation(deps.androidx.coreKtx)
-    implementation(deps.koin.core)
-    implementation(deps.lifecycle.viewModelKtx)
-    implementation(deps.coroutines.core)
-    implementation(deps.timber)
+    implementation(deps.androidx.appCompat)
+    implementation(deps.androidx.material)
+    implementation(deps.androidx.constraintLayout)
+
+    addUnitTest()
+    testImplementation(deps.koin.testJunit4)
+    testImplementation(deps.koin.test)
+    testImplementation(deps.test.junit)
 }

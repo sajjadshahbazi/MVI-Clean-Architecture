@@ -52,6 +52,7 @@ dependencies {
     implementation(deps.androidx.appCompat)
     implementation(deps.androidx.material)
     implementation(deps.androidx.constraintLayout)
+    implementation(deps.coroutines.core)
 
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
