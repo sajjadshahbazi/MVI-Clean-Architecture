@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -43,9 +44,18 @@ dependencies {
         )
     )
 
+
+    implementation(deps.androidx.coreKtx)
+    implementation(deps.androidx.appCompat)
+
     implementation(deps.androidx.coreKtx)
     implementation(deps.koin.core)
     implementation(deps.lifecycle.viewModelKtx)
+    implementation(deps.lifecycle.extensions)
     implementation(deps.coroutines.core)
     implementation(deps.timber)
+}
+
+kapt {
+    correctErrorTypes = true
 }
