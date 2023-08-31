@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -39,13 +40,20 @@ dependencies {
     implementation(common)
     implementation(data)
 
+    implementation(deps.lifecycle.viewModelKtx)
+
     implementation(deps.androidx.coreKtx)
     implementation(deps.androidx.appCompat)
     implementation(deps.androidx.material)
     implementation(deps.androidx.constraintLayout)
+    implementation(deps.koin.android)
 
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)
     testImplementation(deps.test.junit)
+}
+
+kapt {
+    correctErrorTypes = true
 }

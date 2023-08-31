@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -52,6 +53,4 @@ dependencies {
     implementation(deps.squareup.loggingInterceptor)
 
     addUnitTest()
-    testImplementation(deps.koin.testJunit4)
-    testImplementation(deps.koin.test)
 }

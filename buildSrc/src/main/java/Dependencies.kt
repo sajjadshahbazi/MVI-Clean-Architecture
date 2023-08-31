@@ -39,6 +39,7 @@ object deps {
         const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version" // viewModelScope
         const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version" // lifecycleScope
         const val commonJava8 = "androidx.lifecycle:lifecycle-common-java8:$version"
+        const val extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
     }
 
     object squareup {
@@ -58,12 +59,18 @@ object deps {
     }
 
     object koin {
-        private const val version = "3.2.0"
+        private const val version = "3.4.0"
 
         const val core = "io.insert-koin:koin-core:$version"
         const val android = "io.insert-koin:koin-android:$version"
         const val testJunit4 = "io.insert-koin:koin-test-junit4:$version"
         const val test = "io.insert-koin:koin-test:$version"
+    }
+
+    object hilt{
+        private const val version = "2.44"
+        const val core = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-compiler:$version"
     }
 
     const val coil = "io.coil-kt:coil:2.1.0"
@@ -108,7 +115,7 @@ inline val DependencyHandler.domain get() = project(":domain")
 //inline val DependencyHandler.core get() = project(":core")
 inline val DependencyHandler.common get() = project(":common")
 inline val DependencyHandler.data get() = project(":data")
-//inline val DependencyHandler.featureMain get() = project(":feature-main")
+inline val DependencyHandler.featureUser get() = project(":featureuser")
 //inline val DependencyHandler.featureAdd get() = project(":feature-add")
 //inline val DependencyHandler.featureSearch get() = project(":feature-search")
 //inline val DependencyHandler.mviBase get() = project(":mvi-base")

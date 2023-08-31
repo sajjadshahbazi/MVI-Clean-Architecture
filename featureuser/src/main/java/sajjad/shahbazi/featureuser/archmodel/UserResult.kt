@@ -6,11 +6,11 @@ import sajjad.shahbazi.domain.models.UserRepoModel
 
 sealed class UserResult : MviResult{
     data class UserRes(
-        val users : UserRepoModel
+        val user : UserRepoModel
     ) : UserResult()
     data class UsersListRes(
         val users : List<UserRepoModel>
     ) : UserResult()
-    data class Error(val err: ErrorHolder) : UserResult()
-    data class Loading(val user : UserRepoModel) : UserResult()
+    data class Error(val error: ErrorHolder) : UserResult()
+    object Loading : UserResult()
 }

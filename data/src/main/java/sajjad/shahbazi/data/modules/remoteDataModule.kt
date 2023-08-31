@@ -30,7 +30,7 @@ val remoteDataModule = module {
 
     single { getOkHttpClient() }
 
-    factory { UsersServerToUsersRepoModel(mapper = get())}
+    factory { UsersServerToUsersRepoModel(mapper = get()) }
 
     single {
         getRetrofit(
@@ -40,25 +40,13 @@ val remoteDataModule = module {
         )
     }
 
-
-
     factory { UserServerToUserRepoModel() }
-//
-//    factory { UserDomainToUserBodyMapper() }
-
-//    factory(ERROR_RESPONSE_JSON_ADAPTER) { get<Moshi>().adapter<ErrorResponse>() }
-
-//    factory { UserErrorMapper(get(ERROR_RESPONSE_JSON_ADAPTER)) }
 
     single<UserRepository> {
         UserRepositoryImpl(
             userRemoteApi = get(),
             userMapper = get(),
             usersMapper = get()
-//            dispatchers = get(),
-//            responseToDomain = get<UserResponseToUserDomainMapper>(),
-//            domainToBody = get<UserDomainToUserBodyMapper>(),
-//            errorMapper = get<UserErrorMapper>(),
         )
     }
 }
