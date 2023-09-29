@@ -55,7 +55,7 @@ dependencies {
     implementation(deps.androidx.material)
     implementation(deps.androidx.constraintLayout)
     implementation(deps.coroutines.core)
-    implementation(deps.koin.android)
+    implementation(deps.lifecycle.viewModelKtx)
 
     addUnitTest()
     testImplementation(deps.koin.testJunit4)

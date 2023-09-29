@@ -46,12 +46,29 @@ dependencies {
     implementation(deps.androidx.appCompat)
     implementation(deps.androidx.material)
     implementation(deps.androidx.constraintLayout)
+
     implementation(deps.koin.android)
+    implementation(deps.koin.core)
+    implementation(deps.lifecycle.viewModelKtx)
+    implementation(deps.lifecycle.extensions)
+    implementation ("androidx.activity:activity-ktx:1.2.3")
 
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)
     testImplementation(deps.test.junit)
+
+
+
+    implementation(deps.androidx.coreKtx)
+    implementation(deps.androidx.appCompat)
+
+    implementation(deps.coroutines.core)
+    implementation(deps.timber)
+
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
 }
 
 kapt {

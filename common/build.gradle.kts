@@ -50,6 +50,7 @@ dependencies {
 
     implementation(deps.androidx.coreKtx)
     implementation(deps.koin.core)
+    implementation(deps.koin.android)
     implementation(deps.lifecycle.viewModelKtx)
     implementation(deps.lifecycle.extensions)
     implementation(deps.coroutines.core)
