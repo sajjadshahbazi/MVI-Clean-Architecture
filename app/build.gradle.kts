@@ -57,6 +57,9 @@ dependencies {
     implementation(deps.coroutines.core)
     implementation(deps.lifecycle.viewModelKtx)
 
+    implementation(deps.koin.android)
+    implementation(deps.koin.core)
+
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)
