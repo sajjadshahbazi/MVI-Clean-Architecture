@@ -57,7 +57,7 @@ class UserViewModel(
         return sharedFlow.let(::intentFilter)
             .map(::actionFromIntent)
             .let(processor::actionProcessor)
-            .scan(UserState.idle(), ::reducer)?.distinctUntilChanged()
+            .scan(UserState.idle(), ::reducer).distinctUntilChanged()
             .stateIn<UserState>(viewModelScope, SharingStarted.Eagerly, UserState.idle())
     }
 
