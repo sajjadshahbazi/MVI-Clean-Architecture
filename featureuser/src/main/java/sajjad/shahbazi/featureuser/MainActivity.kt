@@ -12,12 +12,19 @@ import sajjad.shahbazi.featureuser.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<
         UserIntent,
         UserState,
-        UserViewModel>(R.layout.activity_main) {
+        UserViewModel>(
+//    R.layout.activity_main
+) {
+
+    private var binding: ActivityMainBinding? = null
 
 //    private val binding by viewBinding<MainActivity>()
     override val viewModel : UserViewModel by viewModel()
     override fun setupViews() {
-        ActivityMainBinding.
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding?.root.let {
+            setContentView(it)
+        }
     }
 
     override fun intents(): Flow<UserIntent> = merge(
@@ -30,7 +37,7 @@ class MainActivity : BaseActivity<
 
     private fun showUsersList(_state : UserState){
         if (_state.users.isNotEmpty()) {
-//            tvShowUser
+            binding?.tvShowUser?.text = _state.users.firstOrNull()?.firstName.toString()
         }
     }
 }

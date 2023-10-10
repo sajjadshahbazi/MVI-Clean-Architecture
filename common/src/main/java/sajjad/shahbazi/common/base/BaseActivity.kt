@@ -1,10 +1,12 @@
 package sajjad.shahbazi.common.base
 
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -18,9 +20,9 @@ abstract class BaseActivity<
         S : MviState,
         VM : BaseViewModel<I, S>,
         >(
-    @LayoutRes contentLayoutId: Int,
+//    @LayoutRes contentLayoutId: Int,
 ) :
-    AppCompatActivity(contentLayoutId), MviView<I, S> {
+    AppCompatActivity(), MviView<I, S> {
     abstract val viewModel: VM
 
     @CallSuper
@@ -45,14 +47,7 @@ abstract class BaseActivity<
     }
 
     protected abstract fun setupViews()
-//        val loading: AlertDialog by lazy {
-//        AlertDialog.Builder(this, R.style.LoadingTheme)
-//            .setView(R.layout.dialog_loading)
-//            .setOnDismissListener {
-//            }
-//            .setCancelable(false)
-//            .create()
-//    }
+
 }
 
 

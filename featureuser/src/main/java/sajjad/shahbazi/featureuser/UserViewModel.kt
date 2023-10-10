@@ -1,18 +1,7 @@
 package sajjad.shahbazi.featureuser
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.scan
-import kotlinx.coroutines.flow.shareIn
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.*
 import sajjad.shahbazi.common.mvibase.MviProcessor
 import sajjad.shahbazi.common.base.BaseViewModel
 import sajjad.shahbazi.featureuser.archmodel.UserAction
@@ -26,8 +15,8 @@ class UserViewModel(
         UserIntent,
         UserState>() {
 
-    override val viewState: StateFlow<UserState> = compose()
     private var sharedFlow: MutableSharedFlow<UserIntent> = MutableSharedFlow<UserIntent>()
+    override val viewState: StateFlow<UserState> = compose()
 
     private fun intentFilter(userIntent: Flow<UserIntent>): Flow<UserIntent> {
         val sharedIntent = userIntent.shareIn(viewModelScope, SharingStarted.Eagerly, 1)
@@ -57,7 +46,8 @@ class UserViewModel(
         return sharedFlow.let(::intentFilter)
             .map(::actionFromIntent)
             .let(processor::actionProcessor)
-            .scan(UserState.idle(), ::reducer).distinctUntilChanged()
+            .scan(UserState.idle(), ::reducer)
+            .distinctUntilChanged()
             .stateIn<UserState>(viewModelScope, SharingStarted.Eagerly, UserState.idle())
     }
 

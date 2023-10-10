@@ -9,12 +9,15 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import sajjad.shahbazi.common.Mapper
 import sajjad.shahbazi.data.BuildConfig
 import sajjad.shahbazi.data.errorhandling.ResultCallAdapterFactory
 import sajjad.shahbazi.data.mappers.UserServerToUserRepoModel
 import sajjad.shahbazi.data.mappers.UsersServerToUsersRepoModel
+import sajjad.shahbazi.data.models.UserServerModel
 import sajjad.shahbazi.data.remote.UserRemoteApi
 import sajjad.shahbazi.data.repository.UserRepositoryImpl
+import sajjad.shahbazi.domain.models.UserRepoModel
 import sajjad.shahbazi.domain.repositories.UserRepository
 import java.util.concurrent.TimeUnit
 
@@ -48,6 +51,14 @@ val remoteDataModule = module {
             userMapper = get(),
             usersMapper = get()
         )
+    }
+
+    factory <Mapper<List<UserServerModel>, List<UserRepoModel>>>{
+        UsersServerToUsersRepoModel(mapper = get())
+    }
+
+    factory <Mapper<UserServerModel, UserRepoModel>>{
+        UserServerToUserRepoModel()
     }
 }
 
