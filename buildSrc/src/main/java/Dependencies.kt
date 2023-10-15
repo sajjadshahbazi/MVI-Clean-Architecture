@@ -48,6 +48,9 @@ object deps {
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10"
         const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:1.13.0"
         const val leakCanary = "com.squareup.leakcanary:leakcanary-android:2.9.1"
+
+        const val gson = "com.google.code.gson:gson:2.6.2"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:2.1.0"
     }
 
     object coroutines {
@@ -112,13 +115,9 @@ inline val PDsS.kotlinParcelize: PDS get() = id("kotlin-parcelize")
 inline val PDsS.nocopyPlugin: PDS get() = id("dev.ahmedmourad.nocopy.nocopy-gradle-plugin")
 
 inline val DependencyHandler.domain get() = project(":domain")
-//inline val DependencyHandler.core get() = project(":core")
 inline val DependencyHandler.common get() = project(":common")
 inline val DependencyHandler.data get() = project(":data")
 inline val DependencyHandler.featureUser get() = project(":featureuser")
-//inline val DependencyHandler.featureAdd get() = project(":feature-add")
-//inline val DependencyHandler.featureSearch get() = project(":feature-search")
-//inline val DependencyHandler.mviBase get() = project(":mvi-base")
 inline val DependencyHandler.mviTesting get() = project(":mvi-testing")
 inline val DependencyHandler.testUtils get() = project(":test-utils")
 

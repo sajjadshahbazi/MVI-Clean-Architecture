@@ -1,5 +1,6 @@
 package sajjad.shahbazi.data.errorhandling
 
+import android.util.Log
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
@@ -34,7 +35,6 @@ class ResultCall<T>(private val delegate: Call<T>) : Call<RetrofitResult<T>> {
                         )
                     }
                 }
-
                 callback.onResponse(
                     this@ResultCall,
                     Response.success(result)

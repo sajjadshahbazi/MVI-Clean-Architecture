@@ -1,14 +1,15 @@
 package sajjad.shahbazi.data.modules
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import sajjad.shahbazi.common.Mapper
 import sajjad.shahbazi.data.BuildConfig
 import sajjad.shahbazi.data.errorhandling.ResultCallAdapterFactory
@@ -29,7 +30,7 @@ val remoteDataModule = module {
 
     singleOf(UserRemoteApi::invoke)
 
-    single { getMoshi() }
+    single { getGson }
 
     single { getOkHttpClient() }
 
@@ -38,12 +39,10 @@ val remoteDataModule = module {
     single {
         getRetrofit(
             baseUrl = get(BASE_URL_QUALIFIER),
-            moshi = get(),
+            gson = get(),
             client = get()
         )
     }
-
-    factory { UserServerToUserRepoModel() }
 
     single<UserRepository> {
         UserRepositoryImpl(
@@ -53,26 +52,24 @@ val remoteDataModule = module {
         )
     }
 
-    factory <Mapper<List<UserServerModel>, List<UserRepoModel>>>{
+    factory<Mapper<List<UserServerModel>, List<UserRepoModel>>> {
         UsersServerToUsersRepoModel(mapper = get())
     }
 
-    factory <Mapper<UserServerModel, UserRepoModel>>{
+    factory<Mapper<UserServerModel, UserRepoModel>> {
         UserServerToUserRepoModel()
     }
 }
 
-private fun getMoshi(): Moshi {
-    return Moshi
-        .Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-}
+private var getGson = GsonBuilder()
+    .setLenient()
+    .serializeNulls()
+    .create()
 
-private fun getRetrofit(baseUrl: String, moshi: Moshi, client: OkHttpClient): Retrofit {
+private fun getRetrofit(baseUrl: String, gson: Gson, client: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .client(client)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(ResultCallAdapterFactory())
         .baseUrl(baseUrl)
         .build()

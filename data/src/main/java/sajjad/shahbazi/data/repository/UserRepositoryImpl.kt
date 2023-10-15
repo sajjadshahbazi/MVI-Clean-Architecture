@@ -1,6 +1,7 @@
 package sajjad.shahbazi.data.repository
 
 import sajjad.shahbazi.common.Mapper
+import sajjad.shahbazi.data.mappers.UsersServerToUsersRepoModel
 import sajjad.shahbazi.data.models.UserServerModel
 import sajjad.shahbazi.data.remote.MapRemoteApiServiceToApiResultModel
 import sajjad.shahbazi.data.remote.UserRemoteApi
@@ -11,7 +12,7 @@ import sajjad.shahbazi.domain.repositories.UserRepository
 class UserRepositoryImpl(
     private val userRemoteApi: UserRemoteApi,
     private val userMapper: Mapper<UserServerModel, UserRepoModel>,
-    private val usersMapper: Mapper<List<UserServerModel>, List<UserRepoModel>>
+    private val usersMapper: UsersServerToUsersRepoModel
 ) : UserRepository {
 
     override suspend fun getUsers(): ApiResult<List<UserRepoModel>> =

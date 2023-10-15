@@ -41,16 +41,11 @@ dependencies {
     implementation(deps.coroutines.core)
 
     implementation(deps.squareup.retrofit)
-    implementation(deps.squareup.moshiKotlin)
-    implementation(deps.squareup.converterMoshi)
+    implementation(deps.squareup.gsonConverter)
+    implementation(deps.squareup.gson)
     implementation(deps.squareup.loggingInterceptor)
 
     implementation(deps.koin.core)
-
-    implementation(deps.squareup.retrofit)
-    implementation(deps.squareup.moshiKotlin)
-    implementation(deps.squareup.converterMoshi)
-    implementation(deps.squareup.loggingInterceptor)
 
     addUnitTest()
 }

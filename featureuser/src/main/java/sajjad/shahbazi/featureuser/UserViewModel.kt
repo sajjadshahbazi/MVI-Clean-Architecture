@@ -18,13 +18,12 @@ class UserViewModel(
     private var sharedFlow: MutableSharedFlow<UserIntent> = MutableSharedFlow<UserIntent>()
     override val viewState: StateFlow<UserState> = compose()
 
-    private fun intentFilter(userIntent: Flow<UserIntent>): Flow<UserIntent> {
-        val sharedIntent = userIntent.shareIn(viewModelScope, SharingStarted.Eagerly, 1)
-        return userIntent.transform<UserIntent, UserIntent> {
-            sharedIntent.filter { it is UserIntent.InitialIntent }.take(1)
-            sharedIntent.filter { it !is UserIntent.InitialIntent }
-        }
-    }
+    private fun Flow<UserIntent>.intentFilter(): Flow<UserIntent> =
+        merge(
+            filterIsInstance<UserIntent.InitialIntent>()
+                .take(1),
+            filterIsInstance<UserIntent.GetUser>()
+        )
 
     private fun actionFromIntent(intent: UserIntent): UserAction {
         return when (intent) {
@@ -38,12 +37,12 @@ class UserViewModel(
         }
     }
 
-    override suspend fun processIntent(intent: Flow<UserIntent>) {
-        intent.collect(sharedFlow)
+    override suspend fun processIntent(intent: UserIntent) {
+        sharedFlow.emit(intent)
     }
 
     private fun compose(): StateFlow<UserState> {
-        return sharedFlow.let(::intentFilter)
+        return sharedFlow.intentFilter()
             .map(::actionFromIntent)
             .let(processor::actionProcessor)
             .scan(UserState.idle(), ::reducer)
@@ -78,7 +77,6 @@ class UserViewModel(
 
             is UserResult.UsersListRes -> {
                 previousState.copy(
-                    user = null,
                     users = result.users,
                     error = null,
                     loading = false

@@ -1,14 +1,14 @@
 package sajjad.shahbazi.data.models
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 data class UserServerModel(
-    @Json(name = "uid")
+    @SerializedName("uid")
     val uid: String?=null,
-    @Json(name = "firstName")
+    @SerializedName("firstName")
     val firstName: String?=null,
-    @Json(name = "lastName")
+    @SerializedName("lastName")
     val lastName: String?=null,
-    @Json(name = "age")
+    @SerializedName("age")
     val age: Int?=null
 )

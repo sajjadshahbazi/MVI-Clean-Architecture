@@ -3,6 +3,7 @@ package sajjad.shahbazi.data.errorhandling
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
+import sajjad.shahbazi.data.models.RetrofitResult
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
@@ -18,12 +19,14 @@ class ResultCallAdapterFactory : CallAdapter.Factory() {
         }
         val upperBound = getParameterUpperBound(0, returnType)
 
-        return if (upperBound is ParameterizedType && upperBound.rawType == Result::class.java) {
+        return if (upperBound is ParameterizedType && upperBound.rawType == RetrofitResult::class.java) {
             object : CallAdapter<Any, Call<Result<*>>> {
-                override fun responseType(): Type = getParameterUpperBound(0, upperBound)
+                override fun responseType(): Type {
+                    return getParameterUpperBound(0, upperBound)}
 
-                override fun adapt(call: Call<Any>): Call<Result<*>> =
-                    ResultCall(call) as Call<Result<*>>
+                override fun adapt(call: Call<Any>): Call<Result<*>> {
+                    return ResultCall(call) as Call<Result<*>>
+                }
             }
         } else {
             null
