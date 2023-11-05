@@ -34,8 +34,6 @@ val remoteDataModule = module {
 
     single { getOkHttpClient() }
 
-    factory { UsersServerToUsersRepoModel(mapper = get()) }
-
     single {
         getRetrofit(
             baseUrl = get(BASE_URL_QUALIFIER),
@@ -47,13 +45,8 @@ val remoteDataModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
             userRemoteApi = get(),
-            userMapper = get(),
-            usersMapper = get()
+            userMapper = get()
         )
-    }
-
-    factory<Mapper<List<UserServerModel>, List<UserRepoModel>>> {
-        UsersServerToUsersRepoModel(mapper = get())
     }
 
     factory<Mapper<UserServerModel, UserRepoModel>> {

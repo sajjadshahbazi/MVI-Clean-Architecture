@@ -11,12 +11,16 @@ import sajjad.shahbazi.domain.repositories.UserRepository
 
 class UserRepositoryImpl(
     private val userRemoteApi: UserRemoteApi,
-    private val userMapper: Mapper<UserServerModel, UserRepoModel>,
-    private val usersMapper: UsersServerToUsersRepoModel
+    private val userMapper: Mapper<UserServerModel, UserRepoModel>
 ) : UserRepository {
 
-    override suspend fun getUsers(): ApiResult<List<UserRepoModel>> =
-        MapRemoteApiServiceToApiResultModel(usersMapper).map(userRemoteApi.getUsers())
+    override suspend fun getUsers(): ApiResult<List<UserRepoModel>> {
+        val listMapper = object : Mapper<List<UserServerModel>, List<UserRepoModel>> {
+            override fun map(item: List<UserServerModel>): List<UserRepoModel> =
+                item.map { userMapper.map(it) }
+        }
+        return MapRemoteApiServiceToApiResultModel(listMapper).map(userRemoteApi.getUsers())
+    }
 
 
     override suspend fun getUser(): ApiResult<UserRepoModel> =
