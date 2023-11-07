@@ -3,17 +3,16 @@ import org.gradle.kotlin.dsl.project
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
-const val ktlintVersion = "0.46.1"
-const val kotlinVersion = "1.7.20"
+const val kotlinVersion = "1.8.0"
 
 object appConfig {
     const val applicationId = "com.hoc.flowmvi"
 
-    const val compileSdkVersion = 33
+    const val compileSdkVersion = 34
     const val buildToolsVersion = "32.0.0"
 
     const val minSdkVersion = 21
-    const val targetSdkVersion = 33
+    const val targetSdkVersion = 34
 
     private const val MAJOR = 2
     private const val MINOR = 1
@@ -25,7 +24,7 @@ object appConfig {
 object deps {
     object androidx {
         const val appCompat = "androidx.appcompat:appcompat:1.4.2"
-        const val coreKtx = "androidx.core:core-ktx:1.8.0"
+        const val coreKtx = "androidx.core:core-ktx:$kotlinVersion"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"

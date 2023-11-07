@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.config.JvmAnalysisFlags.useIR
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
+    id ("kotlin-android")
 }
 
 android {
@@ -33,11 +36,17 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures { viewBinding = true }
+    buildFeatures {
+//        viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.0"
+    }
 }
 
 dependencies {
-
     implementation(domain)
     implementation(common)
     implementation(data)
@@ -53,8 +62,6 @@ dependencies {
     implementation(deps.koin.core)
     implementation(deps.lifecycle.extensions)
 
-//    implementation(deps.viewBindingDelegate)
-
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)
@@ -62,8 +69,24 @@ dependencies {
 
     implementation(deps.coroutines.core)
     implementation(deps.timber)
-//
-//    implementation("org.koin:koin-android-viewmodel:2.0.1")
+
+    // Compose
+    val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+//    implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material:material")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.foundation:foundation-layout")
+    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.activity:activity-compose")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material:material-icons-extended")
+//    implementation("androidx.compose.material3:material3-window-size-class")
+    implementation("com.google.accompanist:accompanist-themeadapter-material:0.28.0")
 }
 
 kapt {

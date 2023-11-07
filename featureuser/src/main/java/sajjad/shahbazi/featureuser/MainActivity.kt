@@ -1,13 +1,15 @@
 package sajjad.shahbazi.featureuser
 
+import androidx.activity.compose.setContent
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import sajjad.shahbazi.common.base.BaseActivity
-import sajjad.shahbazi.common.base.clicks
-import sajjad.shahbazi.domain.models.UserRepoModel
 import sajjad.shahbazi.featureuser.archmodel.UserIntent
 import sajjad.shahbazi.featureuser.archmodel.UserState
-import sajjad.shahbazi.featureuser.databinding.ActivityMainBinding
+import sajjad.shahbazi.featureuser.ui.PreviewUserScreen
+
 
 class MainActivity : BaseActivity<
         UserIntent,
@@ -15,43 +17,22 @@ class MainActivity : BaseActivity<
         UserViewModel>(
 ) {
 
-    private var binding: ActivityMainBinding? = null
-    private var users: MutableList<UserRepoModel> = arrayListOf()
-
     override val viewModel: UserViewModel by viewModel()
     override fun setupViews() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        binding?.root?.let {
-            setContentView(it)
-        }
-        binding?.btnTest?.setOnClickListener {
-
+        setContent {
+            PreviewUserScreen(viewModel)
         }
     }
 
     override fun intents(): Flow<UserIntent> =
-        binding?.run {
-            merge(
-                flowOf(UserIntent.InitialIntent),
-                btnTest.clicks().map { UserIntent.GetUser(users.firstOrNull()?.uid ?: "") }
-            )
-        } ?: kotlin.run { merge() }
+        merge(
+            flowOf(UserIntent.InitialIntent),
+            viewModel.viewIntents
+        )
 
     override fun render(state: UserState) {
-        showUsersList(_state = state)
-        showUser(_state = state)
-    }
-
-    private fun showUsersList(_state: UserState) {
-        if (_state.users.isNotEmpty()) {
-            users.addAll(_state.users)
-            binding?.tvShowUser?.text = users.toString()
-        }
-    }
-
-    private fun showUser(_state: UserState) {
-        if (_state.user != null) {
-            binding?.tvShowUser?.text = _state.user.toString()
+        viewModel.viewModelScope.launch {
+            viewModel.viewStates.emit(state)
         }
     }
 }

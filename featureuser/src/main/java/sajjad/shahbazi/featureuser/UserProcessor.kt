@@ -46,9 +46,7 @@ class UserProcessor(
 
     override fun actionProcessor(actions: Flow<UserAction>): Flow<UserResult> =
         merge(
-            actions.filterIsInstance<UserAction.GetUser>()
-                .let(::getUser),
-            actions.filterIsInstance<UserAction.GetUsersList>()
-                .let(::userList)
+            actions.filterIsInstance<UserAction.GetUser>().let(::getUser),
+            actions.filterIsInstance<UserAction.GetUsersList>().let(::userList)
         )
 }

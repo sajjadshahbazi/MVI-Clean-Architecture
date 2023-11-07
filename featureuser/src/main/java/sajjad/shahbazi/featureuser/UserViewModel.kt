@@ -2,6 +2,7 @@ package sajjad.shahbazi.featureuser
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import sajjad.shahbazi.common.mvibase.MviProcessor
 import sajjad.shahbazi.common.base.BaseViewModel
 import sajjad.shahbazi.featureuser.archmodel.UserAction
@@ -17,6 +18,8 @@ class UserViewModel(
 
     private var sharedFlow: MutableSharedFlow<UserIntent> = MutableSharedFlow<UserIntent>()
     override val viewState: StateFlow<UserState> = compose()
+    val viewIntents: MutableSharedFlow<UserIntent> = MutableSharedFlow() // For handle compose event
+    val viewStates: MutableStateFlow<UserState> = MutableStateFlow(UserState.idle()) // For handle compose event
 
     private fun Flow<UserIntent>.intentFilter(): Flow<UserIntent> =
         merge(
@@ -83,5 +86,9 @@ class UserViewModel(
                 )
             }
         }
+    }
+
+    fun getDetailUser(uid: String){
+        viewModelScope.launch { viewIntents.emit(UserIntent.GetUser(uid = uid)) }
     }
 }

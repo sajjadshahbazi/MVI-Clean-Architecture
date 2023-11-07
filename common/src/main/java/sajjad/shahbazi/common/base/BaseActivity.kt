@@ -1,6 +1,7 @@
 package sajjad.shahbazi.common.base
 
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -15,8 +16,7 @@ abstract class BaseActivity<
         I : MviIntent,
         S : MviState,
         VM : BaseViewModel<I, S>,
-        >(
-) :
+        >:
     AppCompatActivity(), MviView<I, S> {
     abstract val viewModel: VM
 
