@@ -10,9 +10,6 @@ Brief project description.
 - [Coroutine](#coroutine)
 - [Jetpack Compose](#jetpack-compose)
 - [Koin](#koin)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
