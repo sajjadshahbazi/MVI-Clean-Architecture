@@ -1,7 +1,3 @@
-Sure, I can help you draft a README file for your GitHub project with detailed explanations of MVI and Clean architectures, along with explanations for coroutine, Jetpack Compose, and Koin. Here's a template you can use:
-
----
-
 # Arch Master
 
 Brief project description.
