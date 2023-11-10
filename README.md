@@ -99,22 +99,5 @@ Koin is a lightweight dependency injection framework for Kotlin.
 - **Modules**: Define how dependencies are provided.
 - **Scopes**: Manage the lifespan of dependencies.
 
-### Detailed Explanation
 
-Describe how Koin is used for dependency injection in your project and how it simplifies the management of dependencies.
 
-## Getting Started
-
-Provide instructions on how to clone, build, and run your project.
-
-## Contributing
-
-Explain how others can contribute to your project. Include guidelines for submitting issues, pull requests, and any coding standards.
-
-## License
-
-Specify the license under which your project is distributed.
-
----
-
-Feel free to replace the placeholder texts with your specific project details. Also, add the appropriate image links for the MVI and Clean architecture diagrams.
