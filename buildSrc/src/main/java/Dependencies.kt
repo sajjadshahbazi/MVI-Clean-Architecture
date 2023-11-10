@@ -3,11 +3,9 @@ import org.gradle.kotlin.dsl.project
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
-const val kotlinVersion = "1.8.0"
+const val kotlinVersion = "1.9.20"
 
 object appConfig {
-    const val applicationId = "com.hoc.flowmvi"
-
     const val compileSdkVersion = 34
     const val buildToolsVersion = "32.0.0"
 
@@ -24,7 +22,7 @@ object appConfig {
 object deps {
     object androidx {
         const val appCompat = "androidx.appcompat:appcompat:1.4.2"
-        const val coreKtx = "androidx.core:core-ktx:$kotlinVersion"
+        const val coreKtx = "androidx.core:core-ktx:1.12.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
         const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
@@ -50,6 +48,21 @@ object deps {
 
         const val gson = "com.google.code.gson:gson:2.6.2"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:2.1.0"
+    }
+
+    object compose {
+        const val androidxComposeCompiler = "1.5.4"
+        const val bom = "androidx.compose:compose-bom:2023.10.01"
+
+        const val layout = "androidx.compose.foundation:foundation-layout"
+        const val foundation = "androidx.compose.foundation:foundation"
+        const val ui = "androidx.compose.ui:ui"
+        const val material = "androidx.compose.material:material"
+        const val material3 = "androidx.compose.material3:material3"
+        const val materialIconsExtended = "androidx.compose.material:material-icons-extended"
+        const val runtime = "androidx.compose.runtime:runtime"
+        const val tooling = "androidx.compose.ui:ui-tooling"
+        const val uiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
     }
 
     object coroutines {
@@ -102,6 +115,7 @@ object deps {
     }
 }
 
+
 private typealias PDsS = PluginDependenciesSpec
 private typealias PDS = PluginDependencySpec
 
@@ -111,7 +125,6 @@ inline val PDsS.kotlinAndroid: PDS get() = id("kotlin-android")
 inline val PDsS.kotlin: PDS get() = id("kotlin")
 inline val PDsS.kotlinKapt: PDS get() = id("kotlin-kapt")
 inline val PDsS.kotlinParcelize: PDS get() = id("kotlin-parcelize")
-inline val PDsS.nocopyPlugin: PDS get() = id("dev.ahmedmourad.nocopy.nocopy-gradle-plugin")
 
 inline val DependencyHandler.domain get() = project(":domain")
 inline val DependencyHandler.common get() = project(":common")

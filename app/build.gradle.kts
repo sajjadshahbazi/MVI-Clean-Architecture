@@ -1,3 +1,5 @@
+import deps.compose.androidxComposeCompiler
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -33,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = androidxComposeCompiler
+    }
 }
 
 dependencies {
@@ -64,6 +70,7 @@ dependencies {
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)
     testImplementation(deps.test.junit)
+
 }
 
 kapt {

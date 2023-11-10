@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.config.JvmAnalysisFlags.useIR
 
 plugins {
     id("com.android.library")
@@ -37,12 +36,11 @@ android {
     }
 
     buildFeatures {
-//        viewBinding = true
         compose = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = deps.compose.androidxComposeCompiler
     }
 }
 
@@ -75,7 +73,7 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-//    implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.compose.runtime:runtime")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material:material")
     implementation("androidx.compose.foundation:foundation")
@@ -85,8 +83,8 @@ dependencies {
     implementation("androidx.activity:activity-compose")
     implementation("androidx.compose.material:material-icons-core")
     implementation("androidx.compose.material:material-icons-extended")
-//    implementation("androidx.compose.material3:material3-window-size-class")
     implementation("com.google.accompanist:accompanist-themeadapter-material:0.28.0")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
 }
 
 kapt {

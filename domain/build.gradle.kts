@@ -34,12 +34,7 @@ android {
 }
 
 dependencies {
-
     implementation(deps.coroutines.core)
-//    implementation(deps.koin.core)
     implementation(deps.androidx.coreKtx)
-
     addUnitTest()
-//    testImplementation(deps.koin.testJunit4)
-//    testImplementation(deps.koin.test)
 }

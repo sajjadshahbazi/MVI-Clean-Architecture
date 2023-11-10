@@ -32,8 +32,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures { viewBinding = true }
 }
 
 dependencies {
@@ -45,7 +43,6 @@ dependencies {
             )
         )
     )
-
 
     implementation(deps.androidx.coreKtx)
     implementation(deps.androidx.appCompat)

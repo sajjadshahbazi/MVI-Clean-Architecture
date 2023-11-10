@@ -8,26 +8,27 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import sajjad.shahbazi.common.Navigation.Routes.UserDetail
 import sajjad.shahbazi.domain.models.UserRepoModel
 import sajjad.shahbazi.featureuser.UserViewModel
 
+
 @Composable
-fun UserList(users: List<UserRepoModel>, onUserClick: (UserRepoModel) -> Unit) {
+fun userList(users: List<UserRepoModel>, onUserClick: (UserRepoModel) -> Unit) {
     LazyColumn {
         items(users) { user ->
-            UserListItem(user = user, onUserClick)
+            userListItem(user = user, onUserClick)
         }
     }
 }
 
 @Composable
-fun UserListItem(user: UserRepoModel, onUserClick: (UserRepoModel) -> Unit) {
+fun userListItem(user: UserRepoModel, onUserClick: (UserRepoModel) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     Column(
@@ -59,51 +60,20 @@ fun UserListItem(user: UserRepoModel, onUserClick: (UserRepoModel) -> Unit) {
 }
 
 @Composable
-fun UserDetails(user: UserRepoModel) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = user.firstName?:"",
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(16.dp)
-        )
-        Text(
-            text = "Age: ${user.age}",
-            modifier = Modifier.padding(16.dp)
-        )
-        Text(
-            text = "Last Name: ${user.lastName}",
-            modifier = Modifier.padding(16.dp)
-        )
-    }
-}
-
-@Composable
-fun UserScreen(viewModel: UserViewModel) {
-    var selectedUser by remember { mutableStateOf<UserRepoModel?>(null) }
+fun userScreen(viewModel: UserViewModel, navController: NavController) {
     val states by viewModel.viewStates.collectAsState()
     if (states.users.isNotEmpty()) {
         Column {
-            UserList(states.users) { user ->
-                selectedUser = user
-                selectedUser?.uid?.let {
-                    viewModel.getDetailUser(it)
+            userList(states.users) { user ->
+                user.uid?.let {
+                    navController.navigate("${UserDetail}/${it}")
                 }
             }
         }
     }
-    if (states.user != null) {
-        states.user?.let {
-            UserDetails(user = it)
-        }
-    }
 }
 
 @Composable
-fun PreviewUserScreen(viewModel : UserViewModel) {
-    UserScreen(viewModel)
+fun previewUserScreen(viewModel : UserViewModel, navController: NavController) {
+    userScreen(viewModel, navController)
 }

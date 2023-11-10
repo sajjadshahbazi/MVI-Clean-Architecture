@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import sajjad.shahbazi.common.base.BaseActivity
 import sajjad.shahbazi.featureuser.archmodel.UserIntent
 import sajjad.shahbazi.featureuser.archmodel.UserState
-import sajjad.shahbazi.featureuser.ui.PreviewUserScreen
+import sajjad.shahbazi.featureuser.ui.userNavHost
 
 
 class MainActivity : BaseActivity<
@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<
     override val viewModel: UserViewModel by viewModel()
     override fun setupViews() {
         setContent {
-            PreviewUserScreen(viewModel)
+            userNavHost(viewModel)
         }
     }
 
