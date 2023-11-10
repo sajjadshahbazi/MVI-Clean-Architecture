@@ -34,7 +34,7 @@ Model-View-Intent (MVI) is an architectural pattern that separates concerns in A
 
 Provide a detailed explanation of how MVI is implemented in your project. Discuss the benefits and rationale behind choosing this architecture.
 
-<img src="https://github.com/sajjadshahbazi/Clean-Architecture-MVI-Architecture-Coroutines-Koin/blob/main/media/2010300919151.jpeg?raw=true" width="800"/>
+<img src="https://github.com/sajjadshahbazi/Clean-Architecture-MVI-Architecture-Coroutines-Koin/blob/main/media/MVI_detail.png?raw=true" width="800"/>
 
 
 ## Clean Architecture
