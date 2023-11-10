@@ -1,4 +1,4 @@
-# Arch Master
+# MVI And Clean Architecture
 
 **I used Clean Architecture, MVI Architecture, Coroutines, Jetpack Compose, and Koin in the sample project.**
 
