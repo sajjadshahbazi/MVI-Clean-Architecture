@@ -2,6 +2,7 @@ package sajjad.shahbazi.featureuser.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
+import androidx.navigation.activity
 import androidx.navigation.compose.rememberNavController
 import sajjad.shahbazi.common.Navigation
 import androidx.navigation.compose.NavHost
@@ -9,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import sajjad.shahbazi.common.Navigation.KeyArgs.UserId
 import sajjad.shahbazi.common.Navigation.Routes.UserDetail
+import sajjad.shahbazi.featureuser.TestActivity
 import sajjad.shahbazi.featureuser.UserViewModel
 
 
@@ -29,6 +31,10 @@ fun userNavHost(_viewModel: UserViewModel) {
         ) { backStackEntry ->
             val userId = backStackEntry.arguments?.getString(UserId) ?: ""
             previewUserDetailScreen(viewModel = _viewModel, uid = userId, navController)
+        }
+
+        activity(Navigation.Routes.Test){
+            activityClass = TestActivity::class
         }
     }
 }

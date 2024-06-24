@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import sajjad.shahbazi.common.Navigation
 import sajjad.shahbazi.common.Navigation.Routes.UserDetail
 import sajjad.shahbazi.domain.models.UserRepoModel
 import sajjad.shahbazi.featureuser.UserViewModel
@@ -66,7 +67,8 @@ fun userScreen(viewModel: UserViewModel, navController: NavController) {
         Column {
             userList(states.users) { user ->
                 user.uid?.let {
-                    navController.navigate("${UserDetail}/${it}")
+//                    navController.navigate("${UserDetail}/${it}")
+                    navController.navigate(Navigation.Routes.Test)
                 }
             }
         }

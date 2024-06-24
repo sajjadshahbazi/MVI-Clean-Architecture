@@ -20,5 +20,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity android:name=".TestActivity" android:exported="true"/>
     </application>
 </manifest>
