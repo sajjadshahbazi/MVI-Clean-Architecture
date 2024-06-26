@@ -8,6 +8,7 @@ import sajjad.shahbazi.common.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.featureconversation.ConversationActivity
 import sajjad.shahbazi.common.Navigation.KeyArgs.UserId
 import sajjad.shahbazi.common.Navigation.Routes.UserDetail
 import sajjad.shahbazi.featureuser.TestActivity
@@ -31,6 +32,10 @@ fun userNavHost(_viewModel: UserViewModel) {
         ) { backStackEntry ->
             val userId = backStackEntry.arguments?.getString(UserId) ?: ""
             previewUserDetailScreen(viewModel = _viewModel, uid = userId, navController)
+        }
+
+        activity(Navigation.Routes.Conversation){
+            activityClass = ConversationActivity::class
         }
 
         activity(Navigation.Routes.Test){

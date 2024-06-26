@@ -55,6 +55,7 @@ dependencies {
     implementation(common)
     implementation(data)
     implementation(featureUser)
+    implementation(conversation)
 
     implementation(deps.androidx.coreKtx)
     implementation(deps.androidx.appCompat)

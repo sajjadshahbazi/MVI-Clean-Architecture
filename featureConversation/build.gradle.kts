@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "sajjad.shahbazi.featureuser"
+    namespace = "sajjad.shahbazi.featureConversation"
     compileSdk = appConfig.compileSdkVersion
 
     defaultConfig {
@@ -48,7 +48,6 @@ dependencies {
     implementation(domain)
     implementation(common)
     implementation(data)
-    implementation(conversation)
 
     implementation(deps.lifecycle.viewModelKtx)
 
