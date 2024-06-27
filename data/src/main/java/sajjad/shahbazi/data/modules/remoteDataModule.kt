@@ -13,14 +13,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 import sajjad.shahbazi.common.Mapper
 import sajjad.shahbazi.data.BuildConfig
 import sajjad.shahbazi.data.errorhandling.ResultCallAdapterFactory
+import sajjad.shahbazi.data.mappers.ConversationServerToConversationRepoModel
 import sajjad.shahbazi.data.mappers.UserServerToUserRepoModel
-import sajjad.shahbazi.data.mappers.UsersServerToUsersRepoModel
+import sajjad.shahbazi.data.models.ConversationServerModel
 import sajjad.shahbazi.data.models.UserServerModel
+import sajjad.shahbazi.data.remote.ConversationRemoteApi
 import sajjad.shahbazi.data.remote.UserRemoteApi
+import sajjad.shahbazi.data.repository.ConversationRepositoryImpl
 import sajjad.shahbazi.data.repository.UserRepositoryImpl
+import sajjad.shahbazi.domain.models.ConversationRepoModel
 import sajjad.shahbazi.domain.models.UserRepoModel
+import sajjad.shahbazi.domain.repositories.ConversationRepository
 import sajjad.shahbazi.domain.repositories.UserRepository
 import java.util.concurrent.TimeUnit
+
 
 internal val BASE_URL_QUALIFIER = named("BASE_URL")
 
@@ -29,6 +35,7 @@ val remoteDataModule = module {
     factory(BASE_URL_QUALIFIER) { "https://run.mocky.io/" }
 
     singleOf(UserRemoteApi::invoke)
+    singleOf(ConversationRemoteApi::invoke)
 
     single { getGson }
 
@@ -51,6 +58,17 @@ val remoteDataModule = module {
 
     factory<Mapper<UserServerModel, UserRepoModel>> {
         UserServerToUserRepoModel()
+    }
+
+    single<ConversationRepository> {
+        ConversationRepositoryImpl(
+            conversationRemoteApi = get(),
+            conversationMapper = get()
+        )
+    }
+
+    factory<Mapper<ConversationServerModel, ConversationRepoModel>> {
+        ConversationServerToConversationRepoModel()
     }
 }
 

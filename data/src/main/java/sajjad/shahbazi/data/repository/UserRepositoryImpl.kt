@@ -1,7 +1,6 @@
 package sajjad.shahbazi.data.repository
 
 import sajjad.shahbazi.common.Mapper
-import sajjad.shahbazi.data.mappers.UsersServerToUsersRepoModel
 import sajjad.shahbazi.data.models.UserServerModel
 import sajjad.shahbazi.data.remote.MapRemoteApiServiceToApiResultModel
 import sajjad.shahbazi.data.remote.UserRemoteApi

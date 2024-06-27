@@ -27,5 +27,5 @@ val viewModelModules: Module = module {
 
 val mviProcessorModules : Module = module {
     factory<MviProcessor<UserAction, UserResult>> { UserProcessor(get()) }
-    factory<MviProcessor<ConversationAction, ConversationResult>> { ConversationProcessor() }
+    factory<MviProcessor<ConversationAction, ConversationResult>> { ConversationProcessor(get()) }
 }

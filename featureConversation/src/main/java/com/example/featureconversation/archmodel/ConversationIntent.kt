@@ -4,4 +4,5 @@ import sajjad.shahbazi.common.mvibase.MviIntent
 
 sealed class ConversationIntent : MviIntent{
     object InitialIntent : ConversationIntent()
+    object LoadMore : ConversationIntent()
 }

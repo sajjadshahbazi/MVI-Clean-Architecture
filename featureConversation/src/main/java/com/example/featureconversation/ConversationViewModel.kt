@@ -6,8 +6,10 @@ import com.example.featureconversation.archmodel.ConversationIntent
 import com.example.featureconversation.archmodel.ConversationResult
 import com.example.featureconversation.archmodel.ConversationState
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import sajjad.shahbazi.common.mvibase.MviProcessor
 import sajjad.shahbazi.common.base.BaseViewModel
+
 
 class ConversationViewModel(
     private val processor: MviProcessor<ConversationAction, ConversationResult>
@@ -29,7 +31,11 @@ class ConversationViewModel(
     private fun actionFromIntent(intent: ConversationIntent): ConversationAction {
         return when (intent) {
             is ConversationIntent.InitialIntent -> {
-                ConversationAction.Init
+                ConversationAction.LoadMessages(1)
+            }
+
+            ConversationIntent.LoadMore -> {
+                ConversationAction.LoadMessages(2)
             }
         }
     }
@@ -52,8 +58,7 @@ class ConversationViewModel(
             is ConversationResult.Loading -> {
                 previousState.copy(
                     loading = true,
-                    error = null,
-                    user = null
+                    error = null
                 )
             }
 
@@ -63,6 +68,18 @@ class ConversationViewModel(
                     loading = false
                 )
             }
+
+            is ConversationResult.Messages -> {
+                previousState.copy(
+                    conversation = result.conversation,
+                    error = null,
+                    loading = false
+                )
+            }
         }
+    }
+
+    fun getMessages(conversationId : Long){
+        viewModelScope.launch { viewIntents.emit(ConversationIntent.InitialIntent) }
     }
 }
