@@ -56,8 +56,6 @@ fun conversationScreen(viewModel: ConversationViewModel, navController: NavContr
 
     loading(states.loading)
 
-    Log.d("Sahhad", " GGGGGGGG REEEECOMPSE ${requestLoadMoreLock}")
-
     LazyColumn(
         state = listState,
         reverseLayout = true,
