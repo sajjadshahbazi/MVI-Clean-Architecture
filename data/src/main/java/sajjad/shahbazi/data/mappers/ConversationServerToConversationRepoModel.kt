@@ -24,7 +24,8 @@ class ConversationServerToConversationRepoModel :
         return ConversationRepoModel(
             messages = item.messages?.map { messageMapper.map(it) } ?: emptyList(),
             page = item.page ?: 1,
-            conversation = item.conversation ?: 1
+            size = item.size ?: 0,
+            conversationId = item.conversation ?: 1
         )
     }
 }

@@ -6,14 +6,18 @@ import sajjad.shahbazi.domain.models.ConversationRepoModel
 import sajjad.shahbazi.domain.models.MessageRepoModel
 
 data class ConversationState(
-    val conversation: ConversationRepoModel?=null,
+    val messages: MutableList<MessageRepoModel> = mutableListOf<MessageRepoModel>(),
+    val page: Int,
+    val size: Int,
     val loading: Boolean,
     val error: ErrorHolder?
 ) : MviState {
     companion object {
         fun idle(): ConversationState {
             return ConversationState(
-                conversation = null,
+                messages = mutableListOf<MessageRepoModel>(),
+                page = 0,
+                size = 0,
                 loading = false,
                 error = null,
             )

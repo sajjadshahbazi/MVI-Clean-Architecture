@@ -11,5 +11,6 @@ data class MessageRepoModel (
 data class ConversationRepoModel(
     val messages : List<MessageRepoModel>,
     val page : Int,
-    val conversation : Long
+    val size : Int,
+    val conversationId : Long
 )

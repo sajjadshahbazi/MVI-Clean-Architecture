@@ -17,7 +17,9 @@ data class ConversationServerModel (
     @SerializedName("messages")
     val messages: List<MessageServerModel>?=null,
     @SerializedName("page")
-    val page: Int?=null,
+    val page: Int?=0,
+    @SerializedName("size")
+    val size: Int?=0,
     @SerializedName("conversation")
     val conversation: Long?=null
 )

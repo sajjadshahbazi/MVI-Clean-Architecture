@@ -1,5 +1,6 @@
 package com.example.featureconversation
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.featureconversation.archmodel.ConversationAction
 import com.example.featureconversation.archmodel.ConversationIntent
@@ -22,20 +23,23 @@ class ConversationViewModel(
     val viewIntents: MutableSharedFlow<ConversationIntent> = MutableSharedFlow()
     val viewStates: MutableStateFlow<ConversationState> = MutableStateFlow(ConversationState.idle())
 
+
     private fun Flow<ConversationIntent>.intentFilter(): Flow<ConversationIntent> =
         merge(
             filterIsInstance<ConversationIntent.InitialIntent>()
-                .take(1)
+                .take(1),
+            filterIsInstance<ConversationIntent.LoadMore>()
         )
 
     private fun actionFromIntent(intent: ConversationIntent): ConversationAction {
         return when (intent) {
             is ConversationIntent.InitialIntent -> {
-                ConversationAction.LoadMessages(1)
+                ConversationAction.GetMessages
             }
 
-            ConversationIntent.LoadMore -> {
-                ConversationAction.LoadMessages(2)
+            is ConversationIntent.LoadMore -> {
+                Log.d("Sahhad", "************* ")
+                ConversationAction.LoadMoreMessages
             }
         }
     }
@@ -70,8 +74,12 @@ class ConversationViewModel(
             }
 
             is ConversationResult.Messages -> {
+
+                previousState.messages.addAll(result.conversation.messages)
+                Log.d("Sahhad", "0000000000000000 ${previousState.messages.size}")
                 previousState.copy(
-                    conversation = result.conversation,
+                    page = result.conversation.page,
+                    size = result.conversation.size,
                     error = null,
                     loading = false
                 )
@@ -79,7 +87,16 @@ class ConversationViewModel(
         }
     }
 
-    fun getMessages(conversationId : Long){
+    fun getMessages(){
         viewModelScope.launch { viewIntents.emit(ConversationIntent.InitialIntent) }
+    }
+
+    fun loadMoreMessages(){
+
+        viewModelScope.launch {
+            viewIntents.emit(ConversationIntent.LoadMore)
+            Log.d("Sahhad", "======================")
+        }
+
     }
 }
