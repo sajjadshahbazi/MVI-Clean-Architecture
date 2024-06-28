@@ -17,7 +17,7 @@ class MapRemoteApiServiceToApiResultModel<T, V>(private val mapper: Mapper<T, V>
             }
             is RetrofitResult.Error -> {
                 ApiResult.Error(
-                    e = item.extra as Exception,
+                    e = (item.extra?:Exception()) as Exception,
                     statusCode = item.statusCode
                 )
             }
