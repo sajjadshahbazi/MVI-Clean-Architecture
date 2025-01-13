@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "sajjad.shahbazi.cleanachitecture"
     compileSdk = appConfig.compileSdkVersion
 
     defaultConfig {

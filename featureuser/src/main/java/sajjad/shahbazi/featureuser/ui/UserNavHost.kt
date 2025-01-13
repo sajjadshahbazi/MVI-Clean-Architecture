@@ -16,7 +16,7 @@ import sajjad.shahbazi.featureuser.UserViewModel
 
 
 @Composable
-fun userNavHost(_viewModel: UserViewModel) {
+fun UserNavHost(_viewModel: UserViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Navigation.Routes.UsersList) {
         composable(Navigation.Routes.UsersList) {
