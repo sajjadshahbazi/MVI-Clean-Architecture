@@ -112,6 +112,11 @@ object deps {
 
         const val mockk = "io.mockk:mockk:1.12.4"
         const val kotlinJUnit = "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+
+        const val mockwebserver = "com.squareup.okhttp3:mockwebserver:4.11.0"
+        const val koinTest = "io.insert-koin:koin-test:3.4.0"
+        const val koinTestJunit = "io.insert-koin:koin-test-junit4:3.4.0"
+        const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     }
 }
 
