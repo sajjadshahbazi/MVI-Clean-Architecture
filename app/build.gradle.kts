@@ -57,6 +57,7 @@ dependencies {
     implementation(data)
     implementation(featureUser)
     implementation(conversation)
+    implementation(companyInfo)
 
     implementation(deps.androidx.coreKtx)
     implementation(deps.androidx.appCompat)

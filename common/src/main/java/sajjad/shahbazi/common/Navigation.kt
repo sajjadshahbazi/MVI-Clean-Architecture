@@ -5,6 +5,7 @@ class Navigation {
         const val UsersList = "UsersList"
         const val UserDetail = "UserDetail"
         const val Conversation = "Conversation"
+        const val CompanyNews = "CompanyNews"
         const val Test = "Test"
     }
 

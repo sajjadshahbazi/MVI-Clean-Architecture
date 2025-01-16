@@ -7,6 +7,7 @@ interface CompanyNewsRepository {
     suspend fun getCompanyNews(
         companyReq : String,
         dateFrom : String,
-        dateTo : String
+        dateTo : String,
+        pageNews: Int
     ): ApiResult<CompanyNewsRepoModel>
 }

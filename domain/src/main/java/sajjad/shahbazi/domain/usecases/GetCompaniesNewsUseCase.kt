@@ -6,12 +6,14 @@ import sajjad.shahbazi.domain.repositories.CompanyNewsRepository
 
 class GetCompaniesNewsUseCase(private val companyNewsRepository: CompanyNewsRepository) {
     suspend operator fun invoke(
-        _companyReq: String,
-        _dateFrom: String,
-        _dateTo: String
+        companyReq: String,
+        dateFrom: String,
+        dateTo: String,
+        pageNews: Int
     ): ApiResult<CompanyNewsRepoModel> = companyNewsRepository.getCompanyNews(
-        companyReq = _companyReq,
-        dateFrom = _dateFrom,
-        dateTo = _dateTo
+        companyReq = companyReq,
+        dateFrom = dateFrom,
+        dateTo = dateTo,
+        pageNews = pageNews
     )
 }

@@ -1,45 +1,50 @@
 package sajjad.shahbazi.companyinfo
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
+
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import sajjad.shahbazi.companyinfo.ui.theme.CleanAchitectureTheme
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import sajjad.shahbazi.common.base.BaseActivity
+import sajjad.shahbazi.companyinfo.archmodel.NewsIntent
+import sajjad.shahbazi.companyinfo.archmodel.NewsState
+import sajjad.shahbazi.companyinfo.ui.theme.CompanyNewsNavHost
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class MainActivity : BaseActivity<
+        NewsIntent,
+        NewsState,
+        CompanyNewsViewModel>(
+) {
+
+    override val viewModel: CompanyNewsViewModel by viewModel()
+    override fun setupViews() {
         setContent {
-            CleanAchitectureTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            MaterialTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    CompanyNewsNavHost(viewModel)
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun intents(): Flow<NewsIntent> =
+        merge(
+            flowOf(NewsIntent.InitialIntent),
+            viewModel.viewIntents
+        )
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CleanAchitectureTheme {
-        Greeting("Android")
+    override fun render(state: NewsState) {
+        viewModel.viewModelScope.launch {
+            Log.d("Sajad", "show state render : ${state.companyNewsRepoModel?.articles?.size?:-1}")
+            viewModel.viewStates.emit(state)
+        }
     }
 }

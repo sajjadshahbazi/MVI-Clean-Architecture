@@ -31,6 +31,7 @@ import sajjad.shahbazi.domain.models.UserRepoModel
 import sajjad.shahbazi.domain.repositories.CompanyNewsRepository
 import sajjad.shahbazi.domain.repositories.ConversationRepository
 import sajjad.shahbazi.domain.repositories.UserRepository
+import sajjad.shahbazi.domain.usecases.GetCompaniesNewsUseCase
 import java.util.concurrent.TimeUnit
 
 
@@ -85,11 +86,15 @@ val remoteDataModule = module {
     factory<Mapper<CompanyNewsServerModel, CompanyNewsRepoModel>> {
         CompanyNewsServerModelToRepoModel()
     }
-
     single<CompanyNewsRepository> {
         CompanyNewsRepositoryImpl(
             companyNewsRemoteApi = get(),
             companyNewsMapper = get()
+        )
+    }
+    single<GetCompaniesNewsUseCase> {
+        GetCompaniesNewsUseCase(
+            companyNewsRepository = get()
         )
     }
 }

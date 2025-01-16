@@ -15,13 +15,15 @@ class CompanyNewsRepositoryImpl(
     override suspend fun getCompanyNews(
         companyReq: String,
         dateFrom: String,
-        dateTo: String
+        dateTo: String,
+        pageNews: Int
     ): ApiResult<CompanyNewsRepoModel> =
         MapRemoteApiServiceToApiResultModel(companyNewsMapper).map(
             companyNewsRemoteApi.getCompanyNews(
                 company = companyReq,
                 from = dateFrom,
-                to = dateTo
+                to = dateTo,
+                page = pageNews
             )
         )
 }
