@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("kotlin-android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -91,6 +92,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-themeadapter-material:0.28.0")
     implementation("androidx.navigation:navigation-compose:2.7.5")
 
+
+    implementation(deps.fresco)
     testImplementation(deps.test.koinTest)
     testImplementation(deps.test.koinTestJunit)
     testImplementation(deps.test.coroutinesTest)

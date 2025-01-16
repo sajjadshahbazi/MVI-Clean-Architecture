@@ -9,6 +9,7 @@ import sajjad.shahbazi.common.ext.getDate
 import sajjad.shahbazi.common.mvibase.MviProcessor
 import sajjad.shahbazi.companyinfo.archmodel.NewsAction
 import sajjad.shahbazi.companyinfo.archmodel.NewsResult
+import sajjad.shahbazi.companyinfo.mappers.toUiModel
 import sajjad.shahbazi.domain.models.ApiResult
 import sajjad.shahbazi.domain.usecases.GetCompaniesNewsUseCase
 
@@ -27,7 +28,7 @@ class CompanyNewsProcessor(
             )) {
                 is ApiResult.Success -> {
                     result.data?.let {
-                        emit(NewsResult.NewsList(it))
+                        emit(NewsResult.NewsList(it.toUiModel()))
                     } ?: kotlin.run {
                         emit(NewsResult.Error(ErrorHolder.Message("error unknown")))
                     }

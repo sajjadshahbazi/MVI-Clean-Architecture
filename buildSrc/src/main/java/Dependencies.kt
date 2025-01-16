@@ -88,7 +88,8 @@ object deps {
         const val compiler = "com.google.dagger:hilt-compiler:$version"
     }
 
-    const val coil = "io.coil-kt:coil:2.1.0"
+    const val coil = "io.coil-kt.coil3:coil-compose:3.0.4"
+    const val fresco = "com.facebook.fresco:fresco:3.6.0"
     const val viewBindingDelegate = "com.github.hoc081098:ViewBindingDelegate:1.4.0"
     const val flowExt = "io.github.hoc081098:FlowExt:0.5.0"
     const val timber = "com.jakewharton.timber:timber:5.0.1"

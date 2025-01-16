@@ -69,6 +69,8 @@ dependencies {
     implementation(deps.koin.android)
     implementation(deps.koin.core)
 
+    implementation("com.facebook.fresco:fresco:3.6.0")
+
     addUnitTest()
     testImplementation(deps.koin.testJunit4)
     testImplementation(deps.koin.test)

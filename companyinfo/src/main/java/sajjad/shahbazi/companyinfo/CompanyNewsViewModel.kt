@@ -1,6 +1,5 @@
 package sajjad.shahbazi.companyinfo
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -50,7 +49,6 @@ class CompanyNewsViewModel(
         return when (intent) {
             is NewsIntent.InitialIntent -> {
                 companyName = companyQueue.removeFirst()
-                Log.d("Sajad", "fetch next companu === ${companyName}")
                 NewsAction.FetchNextCompanyNews(
                     companyName = companyName,
                     page = page
@@ -59,7 +57,6 @@ class CompanyNewsViewModel(
 
             is NewsIntent.GetNextCompanyNews -> {
                 companyName = companyQueue.removeFirst()
-                Log.d("Sajad", "fetch next companu === ${companyName}")
                 NewsAction.FetchNextCompanyNews(
                     companyName = companyName,
                     page = page
@@ -98,15 +95,15 @@ class CompanyNewsViewModel(
             }
 
             is NewsResult.NewsList -> {
-                val updatedArticles = previousState.companyNewsRepoModel?.articles.orEmpty() +
-                        result.companyNewsRepoModel.articles
+                val updatedArticles = previousState.companyNewsUiModel?.articles.orEmpty() +
+                        result.companyNewsUiModel.articles
 
-                val updatedCompanyNewsRepoModel = result.companyNewsRepoModel.copy(
+                val updatedCompanyNewsUiModel = result.companyNewsUiModel.copy(
                     articles = updatedArticles
                 )
 
                 previousState.copy(
-                    companyNewsRepoModel = updatedCompanyNewsRepoModel,
+                    companyNewsUiModel = updatedCompanyNewsUiModel,
                     loading = false
                 )
             }
