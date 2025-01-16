@@ -12,6 +12,8 @@ android {
         minSdk = appConfig.minSdkVersion
         targetSdk = appConfig.targetSdkVersion
 
+        buildConfigField("String", "API_KEY", "\"3eafcd9a5c1d4008a7870ab245090cb3\"") // TODO you must get net token from https://newsapi.org/
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }

@@ -27,8 +27,6 @@
             <option value="$PROJECT_DIR$/companyinfo" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/featureConversation" />
-            <option value="$PROJECT_DIR$/featureuser" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

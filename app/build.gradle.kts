@@ -55,8 +55,6 @@ dependencies {
     implementation(domain)
     implementation(common)
     implementation(data)
-    implementation(featureUser)
-    implementation(conversation)
     implementation(companyInfo)
 
     implementation(deps.androidx.coreKtx)
