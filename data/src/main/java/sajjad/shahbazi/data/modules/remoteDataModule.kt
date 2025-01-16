@@ -24,12 +24,10 @@ import java.util.concurrent.TimeUnit
 
 
 internal val BASE_URL_QUALIFIER = named("BASE_URL")
-//internal val API_KEY = named("API_KEY") // Token Must get from server side
 
 val remoteDataModule = module {
 
     factory(BASE_URL_QUALIFIER) { "https://newsapi.org/" }
-//    factory(API_KEY) { ${BuildConfig.API_KEY} }
 
     singleOf(CompanyNewsRemoteApi::invoke)
 
