@@ -2,6 +2,7 @@ package sajjad.shahbazi.companyinfo
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.transform
 import sajjad.shahbazi.common.base.ErrorHolder
 import sajjad.shahbazi.common.ext.DaysWeek
@@ -41,5 +42,8 @@ class CompanyNewsProcessor(
         }
 
     override fun actionProcessor(actions: Flow<NewsAction>): Flow<NewsResult> =
-        actions.filterIsInstance<NewsAction.FetchNextCompanyNews>().let(::fetchCompanyNews)
+        merge(
+            actions.filterIsInstance<NewsAction.FetchNextCompanyNews>().let(::fetchCompanyNews)
+        )
+
 }

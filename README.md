@@ -1,100 +1,130 @@
-# MVI And Clean Architecture
+# MVI and Clean Architecture News Application
 
-**I used Clean Architecture, MVI Architecture, Coroutines, Jetpack Compose, and Koin in the sample project.**
+## Overview
+
+This project is a sample application implementing **MVI Architecture** and **Clean Architecture**, along with **Jetpack Compose**, **Koin**, **Coroutines**, and **Navigation Component**. It fetches and displays the latest news for four companies (e.g., Microsoft, Apple, Google, Tesla) sequentially from the [News API](https://newsapi.org/). You need an API key from News API to make it functional.
+
+---
 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [MVI Architecture](#mvi-architecture)
-- [Clean Architecture](#clean-architecture)
-- [Coroutine](#coroutine)
-- [Jetpack Compose](#jetpack-compose)
-- [Koin](#koin)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Architectures Used](#architectures-used)
+    - [MVI Architecture](#mvi-architecture)
+    - [Clean Architecture](#clean-architecture)
+- [Technologies](#technologies)
+- [Setup Instructions](#setup-instructions)
+- [Adding New Features](#adding-new-features)
+
+---
 
 ## Introduction
 
-Briefly introduce your project and its goals.
+The goal of this project is to demonstrate a clean, scalable, and testable architecture for an Android app. It follows best practices and utilizes modern Android development tools and libraries.
 
-## MVI Architecture
+---
 
-### Overview
+## Features
 
-Model-View-Intent (MVI) is an architectural pattern that separates concerns in Android app development. It emphasizes a unidirectional data flow and immutable states.
+- Fetches and displays news headlines with images for four companies.
+- Utilizes **MVI Architecture** for state management and unidirectional data flow.
+- Implements **Clean Architecture** for separation of concerns.
+- Modular structure to easily add new features.
+- Supports dependency injection using **Koin**.
+- Uses **Fresco** for image loading (can be swapped with Glide or Coil).
+- Fully built with **Jetpack Compose** for a modern UI experience.
 
-### Key Concepts
+---
 
-- **Model**: Represents the current state of the application.
-- **View**: Renders the UI based on the model's state.
-- **Intent**: Represents user actions or events that trigger state changes.
+## Project Structure
 
-### Detailed Explanation
+- **Presentation**: Contains UI-related code built with Jetpack Compose.
+- **Domain**: Contains business logic, use cases, and entities.
+- **Data**: Responsible for interacting with external data sources (e.g., APIs, databases).
 
-Provide a detailed explanation of how MVI is implemented in your project. Discuss the benefits and rationale behind choosing this architecture.
+---
 
-<img src="https://github.com/sajjadshahbazi/Clean-Architecture-MVI-Architecture-Coroutines-Koin/blob/main/media/MVI_detail.png?raw=true" width="800"/>
+## Architectures Used
 
+### MVI Architecture
 
-## Clean Architecture
+Model-View-Intent (MVI) provides a unidirectional data flow to ensure a predictable state for the UI.
 
-### Overview
+- **Intent**: Represents user actions or events.
+- **ViewModel**: Processes intents, fetches data from the repository, and updates the state.
+- **State**: Immutable representation of the UI at any moment.
+- **View**: Reacts to the state and renders the UI.
 
-Clean Architecture is a design philosophy that separates concerns into distinct layers, making the codebase scalable, maintainable, and testable.
+![MVI Architecture](https://github.com/sajjadshahbazi/MVI-Clean-Architecture/blob/main/media/MVI_detail.png?raw=true)
 
-### Key Concepts
+### Clean Architecture
 
-- **Entities**: Contain enterprise-wide business rules.
-- **Use Cases**: Contain application-specific business rules.
-- **Interface Adapters**: Convert data between the use cases and entities.
-- **Frameworks & Drivers**: Implement external frameworks and tools.
+Clean Architecture separates the code into layers to ensure modularity and maintainability.
 
-### Detailed Explanation
+- **Entities**: Business objects or data models.
+- **Use Cases**: Contain business logic specific to the application.
+- **Repositories**: Abstract data sources like APIs or local databases.
+- **Frameworks & Drivers**: Interface with external tools and frameworks.
 
-Explain how Clean Architecture is integrated into your project, and discuss the advantages it provides in terms of scalability and maintainability.
+![Clean Architecture](https://github.com/sajjadshahbazi/MVI-Clean-Architecture/blob/main/media/Artboard_15587.png?raw=true)
 
-<img src="https://github.com/sajjadshahbazi/Clean-Architecture-MVI-Architecture-Coroutines-Koin/blob/main/media/Artboard_15587.png?raw=true" width="800"/>
+---
 
-## Coroutine
+## Technologies
 
-### Overview
+- **Jetpack Compose**: Modern declarative UI toolkit for building Android apps.
+- **Koin**: Lightweight dependency injection framework.
+- **Coroutines**: For asynchronous programming and concurrency.
+- **Fresco**: For efficient image loading and caching.
+- **Navigation Component**: Handles in-app navigation.
+- **Modularization**: Each feature is placed in a separate module for better scalability.
 
-Coroutines are a lightweight concurrency design pattern in Kotlin for managing asynchronous tasks.
+---
 
-### Key Concepts
+## Setup Instructions
 
-- **Coroutine Scope**: Defines the lifespan of a coroutine.
-- **Suspending Functions**: Functions that can be paused and resumed.
-- **Dispatchers**: Define the thread or threads a coroutine runs on.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sajjadshahbazi/MVI-Clean-Architecture.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd MVI-Clean-Architecture
+   ```
+3. Add your `API_KEY`:
+    - Open the `build.gradle` file for the `data` module.
+    - Add your API key:
+      ```groovy
+      buildConfigField("String", "API_KEY", "\"your_api_key_here\"")
+      ```
+4. Build and run the project:
+   ```bash
+   ./gradlew assembleDebug
+   ```
 
-### Detailed Explanation
+---
 
-Discuss how coroutines are used in your project for asynchronous operations, and highlight any specific use cases.
+## Adding New Features
 
-## Jetpack Compose
+To add a new feature:
 
-### Overview
+1. **Create a new module**:
+    - Name the module according to the feature (e.g., `featureUser`).
+    - Follow the structure and practices used in the `companyNews` module.
 
-Jetpack Compose is a modern UI toolkit for building native Android applications.
+2. **Define dependencies**:
+    - Add dependencies in `buildSrc` for consistency across modules.
+    - Reference these dependencies in the `build.gradle` file of your module.
 
-### Key Concepts
+3. **Use Fresco, Coil, or Glide for images**:
+    - Currently, Fresco is implemented for image loading, but you can swap it with your preferred library.
 
-- **Declarative UI**: Define the UI based on the current state of the application.
-- **Compose Functions**: Build UI components using Kotlin functions.
-- **State Management**: Manage UI state efficiently.
+4. **Follow architectural guidelines**:
+    - Ensure the feature uses Clean Architecture and integrates with the existing MVI pattern.
 
-### Detailed Explanation
+---
 
-Explain how Jetpack Compose is leveraged to build the UI in your project. Provide examples of declarative UI and state management.
-
-## Koin
-
-### Overview
-
-Koin is a lightweight dependency injection framework for Kotlin.
-
-### Key Concepts
-
-- **Modules**: Define how dependencies are provided.
-- **Scopes**: Manage the lifespan of dependencies.
-
-
+This project demonstrates a robust and scalable architecture for building Android applications with modern tools and practices.
 
