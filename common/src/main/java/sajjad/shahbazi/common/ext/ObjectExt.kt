@@ -29,12 +29,12 @@ fun DaysWeek.getDate(): String {
     var date = ""
     when (this) {
 
-        DaysWeek.Yesterday -> {
+        DaysWeek.Today -> {
             date = dateFormat.format(calendar.time)
         }
 
-        DaysWeek.Today -> {
-            calendar.add(Calendar.DAY_OF_MONTH, -1)
+        DaysWeek.Yesterday -> {
+            calendar.add(Calendar.DAY_OF_MONTH, -5)
             date = dateFormat.format(calendar.time)
         }
     }
